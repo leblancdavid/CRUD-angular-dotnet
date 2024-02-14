@@ -9,7 +9,7 @@ namespace CustomerManagement.Services.Customers
     public interface ICustomerService
     {
         Task<IEnumerable<CustomerDto>> GetAllCustomersAsync();
-        Task<CustomerDto> GetCustomerByIdAsync(int id);
+        Task<CustomerDto?> GetCustomerByIdAsync(int id);
         Task DeleteCustomerAsync(int id);
         Task UpdateCustomerAsync(CustomerUpdateDto customer);
         Task AddCustomerAsync(NewCustomerDto customer);

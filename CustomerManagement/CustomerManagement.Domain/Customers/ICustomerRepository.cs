@@ -9,7 +9,7 @@ namespace CustomerManagement.Domain.Customers
     public interface ICustomerRepository
     {
         Task<IEnumerable<Customer>> GetAllAsync();
-        Task<Customer> GetByIdAsync(int id);
+        Task<Customer?> GetByIdAsync(int id);
         Task DeleteAsync(int id);
         Task UpdateAsync(Customer customer);
         Task AddAsync(Customer customer);    

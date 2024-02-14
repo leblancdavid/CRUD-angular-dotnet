@@ -41,9 +41,14 @@ namespace CustomerManagement.Services.Customers
                  });
         }
 
-        public async Task<CustomerDto> GetCustomerByIdAsync(int id)
+        public async Task<CustomerDto?> GetCustomerByIdAsync(int id)
         {
             var customer = await _customerRepository.GetByIdAsync(id);
+            if(customer == null)
+            {
+                return null;
+            }
+
             return new CustomerDto()
             {
 
