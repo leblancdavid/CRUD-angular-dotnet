@@ -396,3 +396,6 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+CustomerManagement/CustomerManagement.WebApi/customer-management.db
+CustomerManagement/CustomerManagement.WebApi/customer-management.db-shm
+CustomerManagement/CustomerManagement.WebApi/customer-management.db-wal
