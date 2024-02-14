@@ -12,6 +12,6 @@ namespace CustomerManagement.Services.Customers
         Task<CustomerDto?> GetCustomerByIdAsync(int id);
         Task DeleteCustomerAsync(int id);
         Task UpdateCustomerAsync(CustomerUpdateDto customer);
-        Task AddCustomerAsync(NewCustomerDto customer);
+        Task<CustomerDto> AddCustomerAsync(NewCustomerDto customer);
     }
 }

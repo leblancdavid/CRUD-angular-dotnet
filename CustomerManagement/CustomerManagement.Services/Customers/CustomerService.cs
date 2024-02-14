@@ -1,14 +1,8 @@
 ﻿using CustomerManagement.Domain.Customers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CustomerManagement.Services.Customers
 {
-    internal class CustomerService : ICustomerService
+    public class CustomerService : ICustomerService
     {
         private readonly ICustomerRepository _customerRepository;
 
@@ -17,9 +11,17 @@ namespace CustomerManagement.Services.Customers
             _customerRepository = customerRepository;
         }
 
-        public async Task AddCustomerAsync(NewCustomerDto customer)
+        public async Task<CustomerDto> AddCustomerAsync(NewCustomerDto customer)
         {
-            await _customerRepository.AddAsync(new Customer(customer.FirstName, customer.LastName, customer.Email));
+            var newCustomer = await _customerRepository.AddAsync(new Customer(customer.FirstName, customer.LastName, customer.Email));
+            return new CustomerDto()
+            {
+                Id = newCustomer.Id,
+                FirstName = newCustomer.FirstName,
+                LastName = newCustomer.LastName,
+                Email = newCustomer.Email,
+                DateCreated = newCustomer.DateCreated,
+            };
         }
 
         public async Task DeleteCustomerAsync(int id)

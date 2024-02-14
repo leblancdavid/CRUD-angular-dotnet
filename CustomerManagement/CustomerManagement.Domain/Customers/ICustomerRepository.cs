@@ -12,6 +12,6 @@ namespace CustomerManagement.Domain.Customers
         Task<Customer?> GetByIdAsync(int id);
         Task DeleteAsync(int id);
         Task UpdateAsync(Customer customer);
-        Task AddAsync(Customer customer);    
+        Task<Customer> AddAsync(Customer customer);    
     }
 }

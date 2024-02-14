@@ -17,7 +17,7 @@ namespace CustomerManagement.SQLRepository.Customers
             _logger = logger;
         }
 
-        public async Task AddAsync(Customer customer)
+        public async Task<Customer> AddAsync(Customer customer)
         {
             try
             {
@@ -28,6 +28,8 @@ namespace CustomerManagement.SQLRepository.Customers
                 await context.AddAsync(customer);
 
                 await context.SaveChangesAsync();
+
+                return customer;
             }
             catch(Exception ex) 
             {
