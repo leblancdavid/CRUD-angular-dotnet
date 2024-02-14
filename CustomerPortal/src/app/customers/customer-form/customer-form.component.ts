@@ -36,8 +36,9 @@ export class CustomerFormComponent implements OnInit {
   }
 
   getCustomer(): void {
-    this.id = parseInt(this.route.snapshot.paramMap.get('id')!, 10);
-    if(this.id != null) {
+    const idParam = this.route.snapshot.paramMap.get('id');
+    if(idParam != null) {
+      this.id = parseInt(idParam!, 10);
       this.customerService.getCustomer(this.id)
         .subscribe(c => { 
           this.customer = c;
@@ -45,10 +46,13 @@ export class CustomerFormComponent implements OnInit {
           this.lastName.setValue(c.lastName); 
           this.email.setValue(c.email);
         });
+    } else {
+      this.id = null;
     }
   }
 
   onSubmit() {
+    console.log(this.id);
     if(this.id != null) {
       this.customerService.updateCustomer({
         id: this.id!!,

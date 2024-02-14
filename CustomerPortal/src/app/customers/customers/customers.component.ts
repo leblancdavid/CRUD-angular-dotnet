@@ -51,4 +51,9 @@ export class CustomersComponent implements OnInit {
   editCustomer(customer: Customer): void {
     this.router.navigate([`edit/${customer.id}`])
   }
+
+  addCustomer(): void {
+    
+    this.router.navigate([`new`])
+  }
 }
