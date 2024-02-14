@@ -1,4 +1,16 @@
 
-<ul>
-      <li *ngFor="let customer of customers">{{customer.firstName}}</li>
-</ul>
+<div class="customer-list">
+  <div class="customer-item" 
+    *ngFor="let customer of customers" 
+    [class.selected]="customer == selectedCustomer"
+    (click)="selectCustomer(customer)">
+    <div class="customer-field">
+      {{customer.firstName}} {{customer.lastName}}
+    </div>
+    <div class="customer-field">
+      {{customer.email}}
+    </div>
+    <button *ngIf="customer == selectedCustomer">Edit</button>
+    <button *ngIf="customer == selectedCustomer" (click)="deleteCustomer(customer)">Delete</button>
+  </div>
+</div>

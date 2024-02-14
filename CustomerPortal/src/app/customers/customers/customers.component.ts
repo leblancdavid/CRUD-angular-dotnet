@@ -14,7 +14,10 @@ import { CommonModule } from '@angular/common';
 export class CustomersComponent implements OnInit {
 
   customers: Customer[] = [];
-  constructor(private customerService: CustomerService) {}
+  selectedCustomer: Customer | null;
+  constructor(private customerService: CustomerService) {
+    this.selectedCustomer = null;
+  }
 
   ngOnInit(): void {
     this.getCustomers();
@@ -24,4 +27,21 @@ export class CustomersComponent implements OnInit {
     this.customerService.getCustomers().subscribe(c => this.customers = c);
   }
 
+  selectCustomer(customer: Customer): void {
+    this.selectedCustomer = customer;
+  }
+
+  deleteCustomer(customer: Customer): void {
+    if(customer == this.selectedCustomer) {
+      this.selectedCustomer = null;
+    }
+
+    this.customerService.deleteCustomer(customer.id)
+      .subscribe(x => { 
+        //Removed the deleted customer from the list
+        const index = this.customers.indexOf(customer, 0);
+        if (index > -1) {
+          this.customers.splice(index, 1);
+        }});
+  }
 }
