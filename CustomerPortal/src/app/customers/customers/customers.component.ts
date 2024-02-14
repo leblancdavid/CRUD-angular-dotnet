@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import {MatListModule} from '@angular/material/list';
 import { CustomerService } from '../customer.service';
 import { Customer } from '../customer';
@@ -14,12 +14,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class CustomersComponent implements OnInit {
 
+  private _selectionSessionKey = 'selectedCustomerId';
   customers: Customer[] = [];
-  selectedCustomer: Customer | null;
+  selectedCustomer: Customer | undefined;
   constructor(private customerService: CustomerService,
     private route: ActivatedRoute,
     private router: Router) {
-    this.selectedCustomer = null;
+    this.selectedCustomer = undefined;
   }
 
   ngOnInit(): void {
@@ -27,16 +28,25 @@ export class CustomersComponent implements OnInit {
   }
 
   getCustomers(): void {
-    this.customerService.getCustomers().subscribe(c => this.customers = c);
+    this.customerService.getCustomers().subscribe(c => {
+      this.customers = c;
+      const selectedCustomerId = sessionStorage.getItem(this._selectionSessionKey);
+      if(selectedCustomerId != null) {
+        const id = parseInt(selectedCustomerId!, 10);
+        this.selectedCustomer = this.customers.find(x => x.id == id);
+      }
+    });
   }
 
   selectCustomer(customer: Customer): void {
     this.selectedCustomer = customer;
+    sessionStorage.setItem(this._selectionSessionKey, customer.id.toString());
   }
 
   deleteCustomer(customer: Customer): void {
     if(customer == this.selectedCustomer) {
-      this.selectedCustomer = null;
+      this.selectedCustomer = undefined;
+      sessionStorage.removeItem(this._selectionSessionKey);
     }
 
     this.customerService.deleteCustomer(customer.id)
@@ -49,11 +59,11 @@ export class CustomersComponent implements OnInit {
   }
 
   editCustomer(customer: Customer): void {
-    this.router.navigate([`edit/${customer.id}`])
+    this.router.navigate([`edit/${customer.id}`]);
   }
 
   addCustomer(): void {
     
-    this.router.navigate([`new`])
+    this.router.navigate([`new`]);
   }
 }

@@ -11,7 +11,7 @@
           id="firstName"
           [formControl]="firstName">
     
-        <div [hidden]="firstName.valid || firstName.untouched">
+        <div class="validation-error" [hidden]="firstName.valid || firstName.untouched">
           <div [hidden]="!firstName.hasError('required')">
             First Name is required.
           </div>
@@ -26,7 +26,7 @@
           id="lastName"
           [formControl]="lastName">
     
-        <div [hidden]="lastName.valid || lastName.untouched">
+        <div class="validation-error" [hidden]="lastName.valid || lastName.untouched">
           <div [hidden]="!lastName.hasError('required')">
             Last Name is required.
           </div>
@@ -42,7 +42,7 @@
           id="email"
           [formControl]="email">
     
-        <div [hidden]="email.valid || email.untouched">
+        <div class="validation-error" [hidden]="email.valid || email.untouched">
           <div [hidden]="!email.hasError('required')">
             Email is required.
           </div>
