@@ -1,6 +1,4 @@
-<p>customers works!</p>
-<mat-selection-list>
-    @for (customer of customers; track customer) {
-      <mat-list-item>{{customer}}</mat-list-item>
-    }
-  </mat-selection-list>
+
+<ul>
+      <li *ngFor="let customer of customers">{{customer.firstName}}</li>
+</ul>

@@ -8,7 +8,7 @@ import { Customer } from './customer';
 })
 export class CustomerService {
 
-  private customerUrl = '/customer';  // URL to web api
+  private customerUrl = 'customer';  // URL to web api
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

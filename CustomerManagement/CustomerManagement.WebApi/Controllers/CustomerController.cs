@@ -1,4 +1,5 @@
 using CustomerManagement.Services.Customers;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CustomerManagement.WebApi.Controllers
