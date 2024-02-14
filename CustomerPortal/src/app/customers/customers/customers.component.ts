@@ -3,6 +3,7 @@ import {MatListModule} from '@angular/material/list';
 import { CustomerService } from '../customer.service';
 import { Customer } from '../customer';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-customers',
@@ -15,7 +16,9 @@ export class CustomersComponent implements OnInit {
 
   customers: Customer[] = [];
   selectedCustomer: Customer | null;
-  constructor(private customerService: CustomerService) {
+  constructor(private customerService: CustomerService,
+    private route: ActivatedRoute,
+    private router: Router) {
     this.selectedCustomer = null;
   }
 
@@ -43,5 +46,9 @@ export class CustomersComponent implements OnInit {
         if (index > -1) {
           this.customers.splice(index, 1);
         }});
+  }
+
+  editCustomer(customer: Customer): void {
+    this.router.navigate([`edit/${customer.id}`])
   }
 }

@@ -10,7 +10,7 @@
     <div class="customer-field">
       {{customer.email}}
     </div>
-    <button *ngIf="customer == selectedCustomer">Edit</button>
+    <button *ngIf="customer == selectedCustomer" (click)="editCustomer(customer)">Edit</button>
     <button *ngIf="customer == selectedCustomer" (click)="deleteCustomer(customer)">Delete</button>
   </div>
 </div>
