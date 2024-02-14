@@ -1,6 +1,38 @@
-<p>customers works!</p>
-<mat-selection-list>
-    @for (customer of customers; track customer) {
-      <mat-list-item>{{customer}}</mat-list-item>
-    }
-  </mat-selection-list>
+
+<button (click)="addCustomer()">Add</button>
+<div class="customer-list-header">
+  <div class="customer-field">
+    Name
+  </div>
+  <div class="customer-field">
+    Email
+  </div>
+  <div class="customer-field">
+    Created
+  </div>
+  <div class="customer-field">
+    Updated
+  </div>
+</div>
+
+<div class="customer-list">
+  <div class="customer-item" 
+    *ngFor="let customer of customers" 
+    [class.selected]="customer == selectedCustomer"
+    (click)="selectCustomer(customer)">
+    <div class="customer-field">
+      {{customer.firstName}} {{customer.lastName}}
+    </div>
+    <div class="customer-field">
+      {{customer.email}}
+    </div>
+    <div class="customer-field">
+      {{customer.dateCreated}}
+    </div>
+    <div class="customer-field">
+      {{customer.dateUpdated}}
+    </div>
+    <button *ngIf="customer == selectedCustomer" (click)="editCustomer(customer)">Edit</button>
+    <button *ngIf="customer == selectedCustomer" (click)="deleteCustomer(customer)">Delete</button>
+  </div>
+</div>

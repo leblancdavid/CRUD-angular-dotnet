@@ -1,1 +1,55 @@
-<p>customer-form works!</p>
+
+<button (click)="back()">Back</button>
+
+<form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+    <div>
+        <label for="firstName">First Name</label>
+    
+        <input
+          type="text"
+          name="firstName"
+          id="firstName"
+          [formControl]="firstName">
+    
+        <div class="validation-error" [hidden]="firstName.valid || firstName.untouched">
+          <div [hidden]="!firstName.hasError('required')">
+            First Name is required.
+          </div>
+        </div>
+      </div>
+      <div>
+        <label for="lastName">Last Name</label>
+    
+        <input
+          type="text"
+          name="lastName"
+          id="lastName"
+          [formControl]="lastName">
+    
+        <div class="validation-error" [hidden]="lastName.valid || lastName.untouched">
+          <div [hidden]="!lastName.hasError('required')">
+            Last Name is required.
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <label for="email">Email</label>
+    
+        <input
+          type="email"
+          name="email"
+          id="email"
+          [formControl]="email">
+    
+        <div class="validation-error" [hidden]="email.valid || email.untouched">
+          <div [hidden]="!email.hasError('required')">
+            Email is required.
+          </div>
+          <div [hidden]="!email.hasError('email')">
+            Must be a valid email.
+          </div>
+        </div>
+      </div>
+      <button type="submit" [disabled]="!customerForm.valid">Submit</button>
+</form>
